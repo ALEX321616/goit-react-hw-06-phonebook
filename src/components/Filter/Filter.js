@@ -1,8 +1,9 @@
 import s from './Filter.module.css';
 import { setFilter } from 'redux/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Filter() {
+  const value = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
   const onChange = e => {
     dispatch(setFilter(e.currentTarget.value));
@@ -11,7 +12,12 @@ export default function Filter() {
   return (
     <label>
       Find contacts by name
-      <input className={s.input} type="text" onChange={onChange} />
+      <input
+        className={s.input}
+        value={value}
+        type="text"
+        onChange={onChange}
+      />
     </label>
   );
 }
